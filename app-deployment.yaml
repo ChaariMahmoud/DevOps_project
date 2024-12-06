@@ -1,0 +1,42 @@
+
+#This file will contain the Spring Boot application deployment and service.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-app
+  template:
+    metadata:
+      labels:
+        app: achat-app
+    spec:
+      containers:
+        - name: achat-app
+          image: chaarimahmoud/tp_devops:latest  # Replace with your Docker image
+          ports:
+            - containerPort: 8081                   # Exposed port
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://mysql-service:3306/testdb?useSSL=false&allowPublicKeyRetrieval=true"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "testuser"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "testpassword"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: achat-service
+spec:
+  selector:
+    app: achat-app
+  ports:
+    - protocol: TCP
+      port: 80              # Port accessible externally
+      targetPort: 8081      # Port your container is listening on
+  type: LoadBalancer         # Use LoadBalancer for external access
