@@ -7,8 +7,6 @@ services:
       MYSQL_DATABASE: achatdb
     ports:
       - "3307:3306"  # Expose MySQL port
-    volumes:
-      - mysql_data:/var/lib/mysql  # Use named volume for persistent storage
 
   app:
     image: chaarimahmoud/tp_devops:latest  # Replace with your Docker image
