@@ -6,10 +6,6 @@ data "aws_iam_role" "lab_role" {
   name = "LabRole"
 }
 
-# Network creation
-resource "aws_vpc" "my_vpc" {
-  cidr_block = var.vpc_cidr
-}
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = vpc-096754b22a6ff0822
