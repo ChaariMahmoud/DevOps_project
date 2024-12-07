@@ -12,11 +12,11 @@ resource "aws_vpc" "my_vpc" {
 }
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id = vpc-096754b22a6ff0822
 }
 
 resource "aws_route_table" "public_route_table" {
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id = vpc-096754b22a6ff0822
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -25,7 +25,7 @@ resource "aws_route_table" "public_route_table" {
 }
 
 resource "aws_subnet" "subnet1" {
-  vpc_id                  = aws_vpc.my_vpc.id
+  vpc_id                  = vpc-096754b22a6ff0822
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
@@ -37,7 +37,7 @@ resource "aws_route_table_association" "subnet1_association" {
 }
 
 resource "aws_subnet" "subnet2" {
-  vpc_id                  = aws_vpc.my_vpc.id
+  vpc_id                  = vpc-096754b22a6ff0822
   cidr_block              = "10.0.2.0/24"
   availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
@@ -60,6 +60,7 @@ resource "aws_eks_cluster" "my_cluster" {
 
   depends_on = [
     aws_vpc.my_vpc,
+    aws_internet_gateway.igw,
     aws_subnet.subnet1,
     aws_subnet.subnet2
   ]
