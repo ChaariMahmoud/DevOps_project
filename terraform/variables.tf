@@ -1,7 +1,7 @@
 variable "vpc_id" {
   description = "The ID of the VPC to use"
   type        = string
-  default     = "vpc-096754b22a6ff0822"
+  default     = "vpc-02f112e29d520c472"
 }
 
 variable "aws_region" {
