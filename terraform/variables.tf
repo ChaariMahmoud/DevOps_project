@@ -1,18 +1,17 @@
-variable "aws_region" {
-  description = "La région AWS"
+variable "vpc_id" {
+  description = "The ID of the VPC to use"
   type        = string
-  default     = "us-east-1" # Région mise à jour
+  default     = "vpc-096754b22a6ff0822"
+}
+
+variable "aws_region" {
+  description = "AWS Region"
+  type        = string
+  default     = "us-east-1"
 }
 
 variable "cluster_name" {
-  description = "Nom du cluster EKS"
+  description = "Name of the EKS cluster"
   type        = string
-  default     = "KuberCluster" # Nom du cluster mis à jour
-}
-
-
-variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
-  type        = string
-  default     = "10.0.0.0/16"
+  default     = "mykubernetes"
 }
